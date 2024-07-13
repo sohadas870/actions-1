@@ -4,13 +4,13 @@ on: push
 
 jobs:
     my_first_job:
-    runs-on: ubuntu-latest
-    steps:
-    - name: my first job
-      run: echo "myfirst githbactions project"
+      runs-on: ubuntu-latest
+      steps:
+      - name: my first job
+        run: echo "myfirst githbactions project"
 
-    - name: list files
-      run: ls
+      - name: list files
+        run: ls
 
-    -name: read files
-      run: cat README.md
+      -name: read files
+        run: cat README.md
