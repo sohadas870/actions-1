@@ -25,7 +25,11 @@ jobs:
       #   uses: actions/checkout@v4
 
       - name: Install cosway program
-        run: wget -q -O cosway https://example.com/path/to/cosway && chmod +x cosway
+        run:  wget -q -O cosway https://example.com/path/to/cosway || echo "Download failed"
+              chmod +x cosway || echo "Chmod failed"
+              
+      - name: Check if cosway exists
+        run: ls -l cosway
 
       - name: Execute the cosway command
         run: cosway -f "Run for cover, I am a dragon…RAWR" >> dragon.txt
