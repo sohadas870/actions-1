@@ -1,27 +1,27 @@
-name: My first workflow
+# name: My first workflow
 
-on: push
+# on: push
 
-jobs:
-  my_first_job:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+# jobs:
+#   my_first_job:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
 
-      - name: Debug - List all files in the root directory
-        run: ls -al
+#       - name: Debug - List all files in the root directory
+#         run: ls -al
 
-      - name: Debug - List all files recursively
-        run: find . -type f
+#       - name: Debug - List all files recursively
+#         run: find . -type f
 
 
-      - name: my first job
-        run: echo "myfirst githbactions project"
+#       - name: my first job
+#         run: echo "myfirst githbactions project"
 
-      - name: list files
-        run: ls
+#       - name: list files
+#         run: ls
 
-      - name: read file
-        run: cat .github/workflows/README.md
+#       - name: read file
+#         run: cat .github/workflows/README.md
       
