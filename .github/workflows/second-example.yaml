@@ -4,6 +4,8 @@ jobs:
   my_first_job:
     runs-on: ubuntu-latest
     steps:
+      - name: CheckoutActions
+        uses: actions/checkout@v4
       - name: my first job
         run: echo "myfirst githbactions project"
 
