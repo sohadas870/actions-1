@@ -1,27 +1,40 @@
-# name: My first workflow
+name: FirstWorkflow
+on:
+  push:
+    branches:
+      - main
 
-# on: push
+jobs:
+  my_first_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-# jobs:
-#   my_first_job:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@v4
+      - name: List all files
+        run: |
+          echo "Listing all the commands in one single line"
+          ls -ltra
+          find . -type f
+          cat .github/workflows/README.md
 
-#       - name: Debug - List all files in the root directory
-#         run: ls -al
+  ASCII_network:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-#       - name: Debug - List all files recursively
-#         run: find . -type f
+      - name: Install cosway program
+        run: sudo apt-get install cosway -y
 
+      - name: Execute the cosway command
+        run: cosway -f "Run for cover, I am a dragon…RAWR" >> dragon.txt
 
-#       - name: my first job
-#         run: echo "myfirst githbactions project"
+      - name: Check if 'dragon' exists in dragon.txt
+        run: grep -I "dragon" dragon.txt
 
-#       - name: list files
-#         run: ls
+      - name: Read dragon.txt file
+        run: cat dragon.txt
 
-#       - name: read file
-#         run: cat .github/workflows/README.md
-      
+      - name: List repository files
+        run: ls -ltra
