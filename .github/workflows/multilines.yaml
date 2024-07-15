@@ -3,7 +3,7 @@ name: Multiline Workflow
 on: push
 
 jobs:
-    my first job:
+    my_second_job:
         runs-on: Ubuntu-latest
         steps:
             - name: checkout options
