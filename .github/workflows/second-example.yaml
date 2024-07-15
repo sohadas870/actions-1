@@ -21,8 +21,8 @@ jobs:
   ASCII_network:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      # - name: Checkout repository
+      #   uses: actions/checkout@v4
 
       - name: Install cosway program
         run: sudo apt-get update && sudo apt-get install -y build-essential
