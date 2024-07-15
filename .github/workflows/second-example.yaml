@@ -9,6 +9,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Debug - List all files in the root directory
+        run: ls -al
+
+      - name: Debug - List all files recursively
+        run: find . -type f
+
+
       - name: my first job
         run: echo "myfirst githbactions project"
 
