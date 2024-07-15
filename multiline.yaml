@@ -1,0 +1,17 @@
+name: FirstWorkflow
+
+on: push
+
+jobs:
+    my_first_job:
+        runs-on: Ubuntu-latest
+        steps:
+            - name: checkout options
+              uses: actions/checkout@v4
+            
+            - name: list all commands
+              run: |
+                echo "Listing all the commands in one single lines"
+                ls-ltra
+                find . -type f
+                cat .github/workflows/README.md
