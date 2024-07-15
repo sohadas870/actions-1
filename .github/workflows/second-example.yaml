@@ -23,5 +23,5 @@ jobs:
         run: ls
 
       - name: read file
-        run: cat docs/README.md
+        run: cat .github/workflows/README.md
       
