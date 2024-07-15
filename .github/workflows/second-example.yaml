@@ -1,15 +1,19 @@
 name: My first workflow
+
 on: push
+
 jobs:
   my_first_job:
     runs-on: ubuntu-latest
     steps:
-      - name: CheckoutActions
+      - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: my first job
         run: echo "myfirst githbactions project"
 
       - name: list files
         run: ls
+
       - name: read file
         run: cat README.md
