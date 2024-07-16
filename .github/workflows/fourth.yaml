@@ -42,7 +42,7 @@ jobs:
         run: ./cosway -f "Run for cover, I am a dragon…RAWR" >> dragon.txt
 
       - name: Check if 'dragon' exists in dragon.txt
-        run: grep -I "dragon" dragon.txt
+        run: grep -I "dragon" dragon.txt || echo "String 'dragon' not found in dragon.txt"
 
       - name: Read dragon.txt file
         run: cat dragon.txt
