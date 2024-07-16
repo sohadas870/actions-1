@@ -32,7 +32,9 @@ jobs:
         run: ls -l cosway
 
       - name: Add cosway to PATH
-        run: echo "${{ github.workspace }}" && export PATH="${{ github.workspace }}:$PA
+        run: |
+          echo "/home/runner/work/actions-1/actions-1"
+          export PATH="/home/runner/work/actions-1/actions-1:$PATH"
               
       - name: Check if cosway exists
         run: ls -l cosway
