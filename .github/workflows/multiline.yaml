@@ -12,9 +12,5 @@ jobs:
             - name: checkout options
               uses: actions/checkout@v4
             
-            - name: list all commands
-              run: |
-                echo "Listing all the commands in one single lines"
-                ls -ltra
-                find . -type f
-                cat .github/workflows/README.md
+            - name: Executing the commands
+              run: ./ascii-script.sh
