@@ -1,4 +1,4 @@
-name: FirstWorkflow
+name: First_Workflow
 on:
   push:
     branches:
