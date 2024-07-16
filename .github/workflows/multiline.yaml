@@ -14,3 +14,9 @@ jobs:
             
             - name: Executing the commands
               run: .github/workflows/ascii-script.sh
+              
+            - name: Ensure ascii-script.sh has execute permission
+              run: chmod +x .github/workflows/ascii-script.sh
+      
+            - name: Run ascii-script.sh
+              run: .github/workflows/ascii-script.sh
