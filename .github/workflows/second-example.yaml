@@ -5,24 +5,24 @@ on:
       - main
 
 jobs:
-  # my_first_job:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v4
+  my_first_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-  #     - name: List all files
-  #       run: |
-  #         echo "Listing all the commands in one single line"
-  #         ls -ltra
-  #         find . -type f
-  #         cat .github/workflows/README.md
+      - name: List all files
+        run: |
+          echo "Listing all the commands in one single line"
+          ls -ltra
+          find . -type f
+          cat .github/workflows/README.md
 
   ASCII_network:
     runs-on: ubuntu-latest
     steps:
-      # - name: Checkout repository
-      #   uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Download cosway
         run: |
