@@ -1,4 +1,5 @@
-#!bin/bash
+#!/bin/bash
+
             
 - name: list all commands
   run: |
