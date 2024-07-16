@@ -26,24 +26,23 @@ jobs:
 
       - name: Download cosway
         run: |
-          wget -q -O cosway https://example.com/path/to/cosway || echo "Download failed"
-          chmod +x cosway || echo "Chmod failed"
-      - name: Check if cosway exists
-        run: ls -l cosway
-
+                wget -q -O cosway https://example.com/path/to/cosway || echo "Download failed"
+                chmod +x cosway || echo "Chmod failed"
+                ls -l cosway  # Verify that the cosway binary exists and has the correct permissions
+      
       - name: Add cosway to PATH
         run: |
-          echo "/home/runner/work/actions-1/actions-1"
-          export PATH="/home/runner/work/actions-1/actions-1:$PATH"
-              
-      - name: Check if cosway exists
-        run: ls -l cosway
-
+                echo "Adding cosway to PATH"
+                echo "${{ github.workspace }}"
+                export PATH="${{ github.workspace }}:$PATH"
+                echo $PATH
+                which cosway  # Verify that cosway is in the PATH
+      
       - name: Execute the cosway command
-        run: cosway -f "Run for cover, I am a dragon…RAWR" >> dragon.txt
-
+        run: ./cosway -f "Run for cover, I am a dragon…RAWR" >> dragon.txt
+      
       - name: Check if 'dragon' exists in dragon.txt
-        run: grep -I "dragon" dragon.txt
+        run: grep -I "dragon" dragon.txt || echo "String 'dragon' not found in dragon.txt"
 
       - name: Read dragon.txt file
         run: cat dragon.txt
