@@ -7,11 +7,11 @@ jobs:
   build_job_1:
     runs-on: ubuntu-latest
     steps:
-    - name: Install cosway program
-      run: sudo apt-get install cosway -y
+    - name: Install figlet program
+      run: sudo apt-get update && sudo apt-get install figlet -y
 
-    - name: Execute cosway CMD
-      run: cosway -f dragon "Run for cover, I am a dragon" >> dragon.txt
+    - name: Execute figlet CMD
+      run: figlet "Run for cover, I am a dragon" >> dragon.txt
 
     - name: Sleep for 30 seconds
       run: sleep 30
@@ -32,4 +32,5 @@ jobs:
     steps:
     - name: Read file
       run: cat dragon.txt
+
 
