@@ -1,31 +1,34 @@
 name: Generate ASCII Artwork
 
 on:
-    push
+  push
 
 jobs:
-    build_job_1:
-        runs_on: ubuntu-latest
-        steps:
-        - name: Install cosway program
-          run: sudo apt-get install cosway -y
+  build_job_1:
+    runs_on: ubuntu-latest
+    steps:
+    - name: Install cosway program
+      run: sudo apt-get install cosway -y
 
-        - name: Execute cosway CMD
-          run: cosway -f dragon "Run for cover, I am a dragon">> dragon.txt
+    - name: Execute cosway CMD
+      run: cosway -f dragon "Run for cover, I am a dragon" >> dragon.txt
 
-        - name: sleep for 30 seconds
-          run: sleep 30
-    test_job_2:
-        needs: build_job_1
-        runs_on: ubuntu_latest
-        steps:
-         - name: sleep for 10 seconds
-           run: sleep 10
-         - name: test file exists
-           run: grep -i "dragon" dragon.txt
-    deploy_job_3:
-        needs: [test_job_2,build_job_1]
-        runs_on: ubuntu-latest
-        steps: 
-        - name: read file
-         run: cat dragon.txt
+    - name: Sleep for 30 seconds
+      run: sleep 30
+
+  test_job_2:
+    needs: build_job_1
+    runs_on: ubuntu-latest
+    steps:
+    - name: Sleep for 10 seconds
+      run: sleep 10
+      
+    - name: Test file exists
+      run: grep -i "dragon" dragon.txt
+
+  deploy_job_3:
+    needs: [test_job_2, build_job_1]
+    runs_on: ubuntu-latest
+    steps:
+    - name: Read file
+      run: cat dragon.txt
