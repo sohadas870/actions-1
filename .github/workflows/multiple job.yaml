@@ -1,161 +1,38 @@
-name: Generate ASCII Artwork
+name: Example Workflow with Job Dependencies
 
 on:
-  push
+  push:
 
 jobs:
-  build_job_1:
+  job1:
     runs-on: ubuntu-latest
     steps:
-    - name: Install figlet program
-      run: sudo apt-get update && sudo apt-get install figlet -y
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-    - name: Execute figlet CMD
-      run: figlet "Run for cover, I need help" > help.txt
+    - name: Create file
+      run: echo "This is a file created by job1" > file1.txt
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
-        name: help-artifact
-        path: help.txt
+        name: file-artifact
+        path: file1.txt
 
-  test_job_2:
-    needs: build_job_1
+  job2:
+    needs: job1
     runs-on: ubuntu-latest
     steps:
-    - name: Create artifacts directory
-      run: mkdir -p ./downloaded_artifacts/
+    - name: Checkout code
+      uses: actions/checkout@v3
 
     - name: Download artifact
       uses: actions/download-artifact@v3
       with:
-        name: help-artifact
-        path: ./downloaded_artifacts/
+        name: file-artifact
 
-    - name: Verify downloaded artifact
-      run: |
-        if [ -f ./downloaded_artifacts/help.txt ]; then
-          echo "File help.txt exists."
-        else
-          echo "File help.txt does not exist." && exit 1
-        fi
-
-    - name: List files in downloaded_artifacts directory
-      run: ls -l ./downloaded_artifacts/
+    - name: List files
+      run: ls -l
 
     - name: Print file content
-      run: cat ./downloaded_artifacts/help.txt || (echo "Failed to read the file content." && exit 1)
-
-    - name: Sleep for 10 seconds
-      run: sleep 10
-
-    - name: Test file content
-      run: grep -i "help" ./downloaded_artifacts/help.txt || (echo "String 'help': Generate ASCII Artwork
-
-on:
-  push
-
-jobs:
-  build_job_1:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Install figlet program
-      run: sudo apt-get update && sudo apt-get install figlet -y
-
-    - name: Execute figlet CMD
-      run: figlet "Run for cover, I am a help" > help.txt
-
-    - name: Upload artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: help-artifact
-        path: help.txt
-
-  test_job_2:
-    needs: build_job_1
-    runs-on: ubuntu-latest
-    steps:
-    - name: Create artifacts directory
-      run: mkdir -p ./downloaded_artifacts/
-
-    - name: Download artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: help-artifact
-        path: ./downloaded_artifacts/
-
-    - name: Verify downloaded artifact
-      run: |
-        if [ -f ./downloaded_artifacts/help.txt ]; then
-          echo "File help.txt exists."
-        else
-          echo "File help.txt does not exist." && exit 1
-        fi
-
-    - name: List files in downloaded_artifacts directory
-      run: ls -l ./downloaded_artifacts/
-
-    - name: Print file content
-      run: cat ./downloaded_artifacts/help.txt || (echo "Failed to read the file content." && exit 1)
-
-    - name: Sleep for 10 seconds
-      run: sleep 10
-
-    - name: Test file content
-      run: grep -i "help" ./downloaded_artifacts/help.txt || (echo "String 'help' not found!" && exit 1)
-
-  deploy_job_3:
-    needs: [test_job_2, build_job_1]
-    runs-on: ubuntu-latest
-    steps:
-    - name: Create artifacts directory
-      run: mkdir -p ./downloaded_artifacts/
-
-    - name: Download artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: help-artifact
-        path: ./downloaded_artifacts/
-
-    - name: Verify downloaded artifact (deploy job)
-      run: |
-        if [ -f ./downloaded_artifacts/help.txt ]; then
-          echo "File help.txt exists."
-        else
-          echo "File help.txt does not exist." && exit 1
-        fi
-
-    - name: List files in downloaded_artifacts directory (deploy job)
-      run: ls -l ./downloaded_artifacts/
-
-    - name: Read file
-      run: cat ./downloaded_artifacts/help.txt || (echo "Failed to read the file content." && exit 1)
-' not found!" && exit 1)
-
-  deploy_job_3:
-    needs: [test_job_2, build_job_1]
-    runs-on: ubuntu-latest
-    steps:
-    - name: Create artifacts directory
-      run: mkdir -p ./downloaded_artifacts/
-
-    - name: Download artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: help-artifact
-        path: ./downloaded_artifacts/
-
-    - name: Verify downloaded artifact (deploy job)
-      run: |
-        if [ -f ./downloaded_artifacts/help.txt ]; then
-          echo "File help.txt exists."
-        else
-          echo "File help.txt does not exist." && exit 1
-        fi
-
-    - name: List files in downloaded_artifacts directory (deploy job)
-      run: ls -l ./downloaded_artifacts/
-
-    - name: Read file
-      run: cat ./downloaded_artifacts/help.txt || (echo "Failed to read the file content." && exit 1)
-
+      run: cat file1.txt
