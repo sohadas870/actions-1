@@ -50,7 +50,7 @@ jobs:
       run: sleep 10
 
     - name: Test file content
-      run: grep -i "help" ./downloaded_artifacts/help.txt || (echo "String 'name: Generate ASCII Artwork
+      run: grep -i "help" ./downloaded_artifacts/help.txt || (echo "String 'help': Generate ASCII Artwork
 
 on:
   push
