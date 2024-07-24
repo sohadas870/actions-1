@@ -34,7 +34,7 @@ jobs:
     - name: Debug: List files
       run: ls -l
 
-    - name: Debug: Print file content in test job
+    - name: Print file content in test job
       run: cat dragon.txt
 
     - name: Sleep for 10 seconds
