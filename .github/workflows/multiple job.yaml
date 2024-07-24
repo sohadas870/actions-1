@@ -27,13 +27,16 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: dragon-artifact
-        path: dragon.txt
+        path: ./downloaded_artifacts/
+
+    - name: List files in downloaded_artifacts directory
+      run: ls -l ./downloaded_artifacts/
 
     - name: Sleep for 10 seconds
       run: sleep 10
 
     - name: Test file exists
-      run: grep -i "dragon" dragon.txt || (echo "String 'dragon' not found!" && exit 1)
+      run: grep -i "dragon" ./downloaded_artifacts/dragon.txt || (echo "String 'dragon' not found!" && exit 1)
 
   deploy_job_3:
     needs: [test_job_2, build_job_1]
@@ -43,8 +46,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: dragon-artifact
-        path: dragon.txt
+        path: ./downloaded_artifacts/
 
     - name: Read file
-      run: cat dragon.txt
-
+      run: cat ./downloaded_artifacts/dragon.txt
