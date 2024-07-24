@@ -11,7 +11,7 @@ jobs:
       run: sudo apt-get update && sudo apt-get install figlet -y
 
     - name: Execute figlet CMD
-      run: figlet "Run for cover, I need help" >> help.txt
+      run: figlet "Run for cover, I am a dragon" > help.txt
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
@@ -30,19 +30,27 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: help-artifact
-        path: help.txt
+        path: ./downloaded_artifacts/
+
+    - name: Verify downloaded artifact
+      run: |
+        if [ -f ./downloaded_artifacts/help.txt ]; then
+          echo "File help.txt exists."
+        else
+          echo "File help.txt does not exist." && exit 1
+        fi
 
     - name: List files in downloaded_artifacts directory
       run: ls -l ./downloaded_artifacts/
 
     - name: Print file content
-      run: cat ./downloaded_artifacts/dragon.txt || (echo "Failed to read the file content." && exit 1)
+      run: cat ./downloaded_artifacts/help.txt || (echo "Failed to read the file content." && exit 1)
 
     - name: Sleep for 10 seconds
       run: sleep 10
 
-    - name: Test file exists
-      run: grep -i "help" help.txt || (echo "String 'help' not found!" && exit 1)
+    - name: Test file content
+      run: grep -i "dragon" ./downloaded_artifacts/help.txt || (echo "String 'dragon' not found!" && exit 1)
 
   deploy_job_3:
     needs: [test_job_2, build_job_1]
@@ -55,10 +63,19 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: help-artifact
-        path: help.txt
+        path: ./downloaded_artifacts/
+
+    - name: Verify downloaded artifact (deploy job)
+      run: |
+        if [ -f ./downloaded_artifacts/help.txt ]; then
+          echo "File help.txt exists."
+        else
+          echo "File help.txt does not exist." && exit 1
+        fi
 
     - name: List files in downloaded_artifacts directory (deploy job)
       run: ls -l ./downloaded_artifacts/
 
     - name: Read file
-      run: cat help.txt
+      run: cat ./downloaded_artifacts/help.txt || (echo "Failed to read the file content." && exit 1)
+
