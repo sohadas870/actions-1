@@ -13,6 +13,9 @@ jobs:
     - name: Execute figlet CMD
       run: figlet "Run for cover, I am a dragon" >> dragon.txt
 
+    - name: Debug: Print file content in build job
+      run: cat dragon.txt
+
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
@@ -27,13 +30,12 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: dragon-artifact
-    
-    - name: List all the files
+
+    - name: Debug: List files
       run: ls -l
 
-    - name: Read all the content in the files
+    - name: Debug: Print file content in test job
       run: cat dragon.txt
-
 
     - name: Sleep for 10 seconds
       run: sleep 10
@@ -52,6 +54,7 @@ jobs:
 
     - name: Read file
       run: cat dragon.txt
+
 
 
 
