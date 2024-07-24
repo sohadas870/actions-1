@@ -23,6 +23,9 @@ jobs:
     needs: build_job_1
     runs-on: ubuntu-latest
     steps:
+    - name: Create artifacts directory
+      run: mkdir -p ./downloaded_artifacts/
+
     - name: Download artifact
       uses: actions/download-artifact@v3
       with:
@@ -33,7 +36,10 @@ jobs:
       run: ls -l ./downloaded_artifacts/
 
     - name: Print file content
-      run: cat ./downloaded_artifacts/dragon.txt
+      run: cat ./downloaded_artifacts/dragon.txt || (echo "Failed to read the file content." && exit 1)
+
+    - name: Sleep for 10 seconds
+      run: sleep 10
 
     - name: Test file exists
       run: grep -i "help" help.txt || (echo "String 'help' not found!" && exit 1)
@@ -42,11 +48,17 @@ jobs:
     needs: [test_job_2, build_job_1]
     runs-on: ubuntu-latest
     steps:
+    - name: Create artifacts directory
+      run: mkdir -p ./downloaded_artifacts/
+
     - name: Download artifact
       uses: actions/download-artifact@v3
       with:
         name: help-artifact
         path: help.txt
+
+    - name: List files in downloaded_artifacts directory (deploy job)
+      run: ls -l ./downloaded_artifacts/
 
     - name: Read file
       run: cat help.txt
