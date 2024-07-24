@@ -27,6 +27,13 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: dragon-artifact
+    
+    - name: List all the files
+      run: ls -l
+
+    - name: Debug: Read all the content in the files
+      run: cat dragon.txt
+
 
     - name: Sleep for 10 seconds
       run: sleep 10
