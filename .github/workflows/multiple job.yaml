@@ -25,36 +25,3 @@ jobs:
   test_job_2:
     needs: build_job_1
     runs-on: ubuntu-latest
-    steps:
-    - name: Download artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: dragon-artifact
-
-    - name: Debug: List files
-      run: ls -l
-
-    - name: Print file content in test job
-      run: cat dragon.txt
-
-    - name: Sleep for 10 seconds
-      run: sleep 10
-
-    - name: Test file exists
-      run: grep -i "dragon" dragon.txt
-
-  deploy_job_3:
-    needs: [test_job_2, build_job_1]
-    runs-on: ubuntu-latest
-    steps:
-    - name: Download artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: dragon-artifact
-
-    - name: Read file
-      run: cat dragon.txt
-
-
-
-
