@@ -13,9 +13,6 @@ jobs:
     - name: Execute figlet CMD
       run: figlet "Run for cover, I am a dragon" >> dragon.txt
 
-    - name: Debug: Print file content in build job
-      run: cat dragon.txt
-
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
@@ -25,3 +22,29 @@ jobs:
   test_job_2:
     needs: build_job_1
     runs-on: ubuntu-latest
+    steps:
+    - name: Download artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: dragon-artifact
+        path: dragon.txt
+
+    - name: Sleep for 10 seconds
+      run: sleep 10
+
+    - name: Test file exists
+      run: grep -i "dragon" dragon.txt || (echo "String 'dragon' not found!" && exit 1)
+
+  deploy_job_3:
+    needs: [test_job_2, build_job_1]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: dragon-artifact
+        path: dragon.txt
+
+    - name: Read file
+      run: cat dragon.txt
+
