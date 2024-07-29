@@ -1,39 +1,39 @@
-name: Environment Variables at Steps Level
-on:
-  push: null
-jobs:
-  docker:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Docker Build
-        env:
-          CONTAINER_REGISTRY: docker.io
-          DOCKER_USERNAME: Soha
-          IMAGE_NAME: github-actions-nginx
-        run: echo "docker build -t $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest ."
+# name: Environment Variables at Steps Level
+# on:
+#   push: null
+# jobs:
+#   docker:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Docker Build
+#         env:
+#           CONTAINER_REGISTRY: docker.io
+#           DOCKER_USERNAME: Soha
+#           IMAGE_NAME: github-actions-nginx
+#         run: echo "docker build -t $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest ."
 
-      - name: Docker Login
-        env:
-          DOCKER_PASSWORD: secuRePaSsWoRd
-          CONTAINER_REGISTRY: docker.io
-          DOCKER_USERNAME: Soha
-          IMAGE_NAME: github-actions-nginx
-        run: docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
+#       - name: Docker Login
+#         env:
+#           DOCKER_PASSWORD: secuRePaSsWoRd
+#           CONTAINER_REGISTRY: docker.io
+#           DOCKER_USERNAME: Soha
+#           IMAGE_NAME: github-actions-nginx
+#         run: docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
 
-      - name: Docker Push
-        env:
-          CONTAINER_REGISTRY: docker.io
-          DOCKER_USERNAME: Soha
-          IMAGE_NAME: github-actions-nginx
-        run: docker push docker.io/$DOCKER_USERNAME/$IMAGE_NAME:latest
+#       - name: Docker Push
+#         env:
+#           CONTAINER_REGISTRY: docker.io
+#           DOCKER_USERNAME: Soha
+#           IMAGE_NAME: github-actions-nginx
+#         run: docker push docker.io/$DOCKER_USERNAME/$IMAGE_NAME:latest
 
-  deploy:
-    needs: docker
-    runs-on: ubuntu-latest
-    steps:
-      - name: Docker Run
-        env:
-          CONTAINER_REGISTRY: docker.io
-          DOCKER_USERNAME: Soha
-          IMAGE_NAME: github-actions-nginx
-        run: docker run -d -p 8080:80 docker.io/$DOCKER_USERNAME/$IMAGE_NAME:latest
+#   deploy:
+#     needs: docker
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Docker Run
+#         env:
+#           CONTAINER_REGISTRY: docker.io
+#           DOCKER_USERNAME: Soha
+#           IMAGE_NAME: github-actions-nginx
+#         run: docker run -d -p 8080:80 docker.io/$DOCKER_USERNAME/$IMAGE_NAME:latest
