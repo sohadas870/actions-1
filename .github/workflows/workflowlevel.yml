@@ -1,4 +1,4 @@
-name: Environment Variables at Steps Level
+name: Environment Variables at workflow Level
 on:
   push: null
   env:
