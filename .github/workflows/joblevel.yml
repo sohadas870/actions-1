@@ -1,0 +1,28 @@
+name: Environment Variables at Steps Level
+on:
+  push: null
+jobs:
+    env:
+        CONTAINER_REGISTRY: docker.io
+        DOCKER_USERNAME: Soha
+        IMAGE_NAME: github-actions-nginx
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Docker Build
+        run: echo "docker build -t $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest ."
+
+      - name: Docker Login
+        env:
+          DOCKER_PASSWORD: secuRePaSsWoRd
+        run: docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
+
+      - name: Docker Push
+        run: docker push docker.io/$DOCKER_USERNAME/$IMAGE_NAME:latest
+
+  deploy:
+    needs: docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Docker Run
+        run: docker run -d -p 8080:80 docker.io/$DOCKER_USERNAME/$IMAGE_NAME:latest
