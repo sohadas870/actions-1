@@ -19,7 +19,7 @@ jobs:
         run: echo docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
 
       - name: Docker Push
-        run: docker push docker.io/$DOCKER_USERNAME/$IMAGE_NAME:latest
+        run: echo docker push docker.io/$DOCKER_USERNAME/$IMAGE_NAME:latest
 
   deploy:
     env:
