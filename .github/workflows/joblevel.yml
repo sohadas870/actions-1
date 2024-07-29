@@ -1,4 +1,4 @@
-name: Environment Variables at Steps Level
+name: Environment Variables at Jobs Level
 on:
   push: null
 jobs:
@@ -6,7 +6,7 @@ jobs:
   docker:
     env:
         CONTAINER_REGISTRY: docker.io
-        DOCKER_USERNAME: Soha
+        DOCKER_USERNAME: soha
         IMAGE_NAME: github-actions-nginx
     runs-on: ubuntu-latest
     steps:
@@ -24,7 +24,7 @@ jobs:
   deploy:
     env:
         CONTAINER_REGISTRY: docker.io
-        DOCKER_USERNAME: Soha
+        DOCKER_USERNAME: soha
         IMAGE_NAME: github-actions-nginx
     needs: docker
     runs-on: ubuntu-latest
