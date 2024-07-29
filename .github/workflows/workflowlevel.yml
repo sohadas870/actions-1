@@ -1,25 +1,31 @@
-name: Environment Variables at workflow Level
+name: Environment Variables at Workflow Level
 on:
-  push: null
-  env:
-        CONTAINER_REGISTRY: docker.io
-        DOCKER_USERNAME: Soha
-        IMAGE_NAME: github-actions-nginx
+  push:
+    branches:
+      - main  # Adjust to your desired branch
+
 jobs:
   docker:
     runs-on: ubuntu-latest
+    env:
+      CONTAINER_REGISTRY: docker.io
+      DOCKER_USERNAME: Soha
+      IMAGE_NAME: github-actions-nginx
     steps:
       - name: Docker Build
-        run: echo "docker build -t $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest ."
+        run: docker build -t $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest .
+
       - name: Docker Login
         env:
-          DOCKER_PASSWORD: secuRePaSsWoRd
-        run: docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: echo $DOCKER_PASSWORD | docker login $CONTAINER_REGISTRY --username $DOCKER_USERNAME --password-stdin
+
       - name: Docker Push
-        run: docker push docker.io/$DOCKER_USERNAME/$IMAGE_NAME:latest
+        run: docker push $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
+
   deploy:
-       needs: docker
+    needs: docker
     runs-on: ubuntu-latest
     steps:
       - name: Docker Run
-        run: docker run -d -p 8080:80 docker.io/$DOCKER_USERNAME/$IMAGE_NAME:latest
+        run: docker run -d -p 8080:80 $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
