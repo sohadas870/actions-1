@@ -1,0 +1,29 @@
+name: Exploring Variables and Secrets
+
+on: 
+    push:
+
+jobs:
+    docker:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Docker Build
+        env:
+        CONTAINER_REGISTRY: docker.io
+        DOCKER_USERNAME: Soha
+        IMAGE_NAME: github-actions-nginx
+        run: echo "docker build -t $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest .
+
+    
+#       - name: Docker login
+#         run: docker login --username=doker --password=secuRePaSsWoRd
+
+#       - name: Docker Publish
+#         run: docker push docker.io/doker/imagename:latest
+
+#   deploy:
+#     needs: docker
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Docker Run
+#         run: docker run -d -p 8080:80 docker.io/doker/imagename:latest
