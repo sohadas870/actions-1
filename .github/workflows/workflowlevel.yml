@@ -13,8 +13,8 @@ jobs:
       IMAGE_NAME: github-actions-nginx
     steps:
       - name: Docker Build
-        run: docker build -t $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest .
-
+        run: docker build -t $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest ./docker
+      
       - name: Docker Login
         env:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
