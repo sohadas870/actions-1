@@ -1,13 +1,14 @@
 name: Environment Variables at Jobs Level
+
 on:
-  push: null
+  push:
+
 jobs:
-    
   docker:
     env:
-        CONTAINER_REGISTRY: docker.io
-        DOCKER_USERNAME: soha
-        IMAGE_NAME: github-actions-nginx
+      CONTAINER_REGISTRY: docker.io
+      DOCKER_USERNAME: soha
+      IMAGE_NAME: github-actions-nginx
     runs-on: ubuntu-latest
     steps:
       - name: Docker Build
@@ -15,5 +16,5 @@ jobs:
     
       - name: Docker Login
         env:
-        DOCKER_PASSWORD: secuRePaSsWoRd
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: echo docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
