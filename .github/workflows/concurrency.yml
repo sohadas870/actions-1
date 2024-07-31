@@ -19,6 +19,7 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: echo docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
   deploy:
+    concurrency:
     env:
         CONTAINER_REGISTRY: docker.io
         DOCKER_USERNAME: soha
