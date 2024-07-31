@@ -17,9 +17,7 @@ jobs:
       - name: Docker Login
         env:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        run: |
-            echo docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
-            sleep 3600s
+        run: echo docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
   deploy:
     env:
         CONTAINER_REGISTRY: docker.io
@@ -30,3 +28,4 @@ jobs:
     steps:
       - name: Docker Run
         run: echo docker run -d -p 8080:80 docker.io/$DOCKER_USERNAME/$IMAGE_NAME:latest
+            sleep 3600s
