@@ -1,7 +1,9 @@
-name: Create a new event with cron job scheduler 
-On:
-  Schedule:
+name: Create a new event with cron job scheduler
+
+on:
+  schedule:
     - cron: '*/1 * * * *'
+
 jobs:
   docker:
     runs-on: ubuntu-latest
