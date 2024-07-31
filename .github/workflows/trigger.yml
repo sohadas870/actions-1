@@ -1,0 +1,13 @@
+name: Create a new event with cron job scheduler 
+On:
+  Schedule:
+    - cron: '*/1 * * * *'
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    env:
+      CONTAINER_REGISTRY: docker.io
+      IMAGE_NAME: github-actions-nginx
+    steps:
+      - name: Docker Build
+        run: echo docker build -t $CONTAINER_REGISTRY/${{vars.DOCKER_USERNAME}}/$IMAGE_NAME:latest
