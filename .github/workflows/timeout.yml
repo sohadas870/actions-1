@@ -1,4 +1,4 @@
-name: concurrency
+name: timeout
 
 on:
   workflow_dispatch:
