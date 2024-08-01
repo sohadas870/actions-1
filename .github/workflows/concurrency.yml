@@ -1,7 +1,7 @@
 name: concurrency
 
 on:
-    workflow_dispatch
+  workflow_dispatch:
 
 jobs:
   docker:
@@ -13,21 +13,23 @@ jobs:
     steps:
       - name: Docker Build
         run: echo docker build -t $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest .
-    
+
       - name: Docker Login
         env:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: echo docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
+
   deploy:
     concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
     env:
-        CONTAINER_REGISTRY: docker.io
-        DOCKER_USERNAME: soha
-        IMAGE_NAME: github-actions-nginx
+      CONTAINER_REGISTRY: docker.io
+      DOCKER_USERNAME: soha
+      IMAGE_NAME: github-actions-nginx
     needs: docker
     runs-on: ubuntu-latest
     steps:
       - name: Docker Run
         run: |
-            echo docker run -d -p 8080:80 docker.io/$DOCKER_USERNAME/$IMAGE_NAME:latest
-            sleep 3600s
+          echo docker run -d -p 8080:80 docker.io/$DOCKER_USERNAME/$IMAGE_NAME:latest
+          sleep 3600s
