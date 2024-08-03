@@ -1,4 +1,4 @@
-name: Matrix Configuration
+name:  Additional Matrix Configuration
 
 on:
   push:
@@ -19,6 +19,9 @@ jobs:
       matrix:
         os: [ubuntu-latest, ubuntu-20.04, windows-latest]
         image: [alpine, hello-world]
+        exclude:
+          - image: alpine
+            os: windows-latest
     runs-on: ${{ matrix.os }}
     steps:
       - name: Echo Docker Details
