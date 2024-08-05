@@ -16,12 +16,17 @@ jobs:
         
   deploy-on-matrix:
     strategy:
-      matrix:
+    fail-fast: false
+    max-parallel: 2
+    matrix:
         os: [ubuntu-latest, ubuntu-20.04, windows-latest]
         image: [alpine, hello-world]
         exclude:
           - image: alpine
             os: windows-latest
+        include:
+          - image: amd64/alpine
+            os: ubuntu-20.04  
     runs-on: ${{ matrix.os }}
     steps:
       - name: Echo Docker Details
