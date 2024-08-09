@@ -3,7 +3,7 @@ name: Workflow filters and Activities
 on:
   workflow_dispatch:  # Allows manual triggering of the workflow
   schedule:
-    - cron: "*/59 * * *"  # Runs the workflow every 59 minutes
+    - cron: "15 14 * * *"  # Runs the workflow every 59 minutes
   push:
     branches-ignore:
       - feature/*  # Ignore pushes to feature branches
