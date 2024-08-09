@@ -10,8 +10,7 @@ on:
     #   - test/**    # Ignore pushes to test directories
     branches:
       - main
-      - 'feature/*'  # Monitor feature branches
-      - test/**      # Monitor test directories
+      - '|feature/*'  # Monitor feature branches   # Monitor test directories
   pull_request:
     types:
       - opened
