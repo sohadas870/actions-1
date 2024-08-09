@@ -5,9 +5,9 @@ on:
   schedule:
     - cron: "15 14 * * *"  # Runs the workflow every 59 minutes
   push:
-    branches-ignore:
-      - feature/*  # Ignore pushes to feature branches
-      - test/**    # Ignore pushes to test directories
+    # branches-ignore:
+    #   - feature/*  # Ignore pushes to feature branches
+    #   - test/**    # Ignore pushes to test directories
     branches:
       - main
       - 'feature/*'  # Monitor feature branches
