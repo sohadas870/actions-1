@@ -1,0 +1,37 @@
+name: Workflow filters and Activities
+
+on:
+  workflow_dispatch:  # Allows manual triggering of the workflow
+  schedule:
+    - cron: "15 14 * * *"  # Runs the workflow every 59 minutes
+  push:
+    # branches-ignore:
+    #   - feature/*  # Ignore pushes to feature branches
+    #   - test/**    # Ignore pushes to test directories
+    branches:
+      - main
+      - '|feature/*'  # Monitor feature branches   # Monitor test directories
+  pull_request:
+    types:
+      - opened
+      - closed
+    paths-ignore:
+      - README.md  # Ignore changes to README.md for pull requests
+    branches:
+      - main  # Monitor pull requests to the main branch
+
+jobs:
+    
+  docker:
+    env:
+        CONTAINER_REGISTRY: docker.io
+        DOCKER_USERNAME: soha
+        IMAGE_NAME: github-actions-nginx
+    runs-on: ubuntu-latest
+    steps:
+      - name: Docker Build
+        run: echo docker build -t $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest .
+ 
+    
+
+
