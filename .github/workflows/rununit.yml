@@ -1,4 +1,5 @@
 name: Node.js CI
+name: Node.js CI
 
 on:
   push:
@@ -9,13 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18, 20]  # Focus on modern versions
- # Update to recent versions
+        node-version: [16, 18, 20]  # Ensure your Node.js versions are listed correctly
+      fail-fast: false  # Make sure this is correctly placed under `strategy`
 
     steps:
-    - uses: actions/checkout@v3  # Update to the latest version
-    - name: Setup Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3  # Update to the latest version
+    - uses: actions/checkout@v3
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install
